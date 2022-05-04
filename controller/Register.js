@@ -220,14 +220,30 @@ module.exports.Register=async(req,res)=>{
       }
 }
 
+
 module.exports.activeStatus = async (req, res) => {
+  console.log("hit")
   try {
-    const user = await UserModal.findOne({memberId: req.params.id});
-    await user.updateOne({ $set: { "isActive": !user.isActive} });
-    res.status(200).json({msg: user.isActive});
+    const user = await UserModal.findOne({memeberId: req.params.id});
+    // console.log(user)
+    // await user.updateOne({ $set: { "isActive": !user.isActive} });
+    
+    
+    if(user.isActive) {
+    await user.updateOne({ $set: { "isActive": false} });
+    await user.updateOne({ $set: { "activeText": "Inactive"} });
+    await user.updateOne({ $set: { "activeColor": "purple"} });
+    } else {
+    await user.updateOne({ $set: { "isActive": true} });
+    await user.updateOne({ $set: { "activeText": "Active"} });
+    await user.updateOne({ $set: { "activeColor": "green"} });
+    }
+    
+    res.status(200).json({ msg: user.isActive, details: { color: user.activeColor, text: user.activeText } });
+    // console.log(user.isActive, user.activeText, user.activeColor)
+
  
   } catch (err) {
     res.status(500).json(err);
   }
 }
-

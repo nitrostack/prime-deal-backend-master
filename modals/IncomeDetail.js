@@ -27,7 +27,7 @@ const IncomeDetail=new mongoose.Schema({
     },
     procesing:{
         type:String,
-        required:true
+        default: "processing"
     },
     payAmt:{
         type:String,
@@ -35,7 +35,7 @@ const IncomeDetail=new mongoose.Schema({
     },
     detail:{
         type:String,
-        required:false
+        default: "Details"
     }
 });
 const Income=mongoose.model("IncomeDetail",IncomeDetail);

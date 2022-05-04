@@ -58,6 +58,7 @@ module.exports.GetIncomeDetail = async (req, res) => {
 module.exports.PostIncoeDetail=async(req,res)=>{
 
   const {paymentDate,selfDeposite,teamDeposite,totalAmt,tds,procesing,payAmt,detail, postedId}=req.body;
+  console.log("income details")
   let datas={};
   // let dataed=VerifyToken(req);
   // console.log(dataed)
@@ -71,6 +72,7 @@ module.exports.PostIncoeDetail=async(req,res)=>{
     datas.payAmt=payAmt;
     datas.detail=detail;
     data.push(datas);
+    console.log(datas)
 
     const Income = new IncomeModal(datas);
   try{
@@ -81,7 +83,7 @@ module.exports.PostIncoeDetail=async(req,res)=>{
 
 
   }catch(error){
-    res.status(500).json({
+    res.status(501).json({
       message:error
     })
   }

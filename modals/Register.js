@@ -17,6 +17,14 @@ const Register=new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    activeText: {
+        type: String,
+        default: "Inactive"
+    },
+    activeColor: {
+        type: String,
+        default: "purple"
+    },
     password:{
         type:String,
         required:true
